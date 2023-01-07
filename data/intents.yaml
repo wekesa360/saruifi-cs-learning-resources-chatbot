@@ -1,0 +1,15 @@
+
+{
+  "intro_greetings": ["Mambo", "Hi", "Hello", "Niaje", "Vipy"],
+  "computer_science": ["General topics", "Computer Science", "All"],
+  "data_science_and_ai": ["Data Science", "Data", "Data analysis", "AI", "ML", "Machine Learning", "Neural Networks", "Time series" ],
+  "google_data_analytics": ["Google Analytics", "Analytics", "Google Analytics"],
+  "digital_marketing": ["Digital Marketing"],
+  "google_cloud": ["Google Cloud", "Cloud Fundamentals", "Infrastructure in Google Cloud"],
+  "aws": ["AWS", "Amazon Web Services", "AWS Educate", "EC2", "DynamicDB", "Cloud Skills Basics", "Amazon Honeycode","AWS Management Console", "Cloud support Engineer"],
+  "ms": ["MS", "Microsoft Learn", "MS Learn", "DevOps", "Github", "Microsoft Azure"],
+  "cyber_security": ["Cyber Security", "Hacking", "Ethical Hacking", " Pentesting"],
+  "IoT": ["IoT", "Internet Of Things", "Programming"],
+  "python": ["Python Programming"],
+  "flutter": ["Flutter", "Cross Platform", "Android", "iOS", "Desktop", "MacOS"]
+}
