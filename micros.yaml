@@ -1,3 +1,0 @@
-websocket:
-  path: /ws/websocket_endpoint
-  script: main.py
