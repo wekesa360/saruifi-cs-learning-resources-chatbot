@@ -1,35 +1,52 @@
+from fastapi import FastAPI, WebSocket, Request
+from sarufi import Sarufi
+from pydantic import BaseModel
+import uvicorn
+from urllib import parse
 import os
 import json
 import logging
-import uvicorn
-from urllib import parse
-from sarufi import Sarufi
 from twilio.rest import Client
 from dotenv import load_dotenv
-from fastapi import FastAPI, Request
 
 load_dotenv()
 
-# required credentials set in environment variables
 username = os.environ.get('SARUFI_USERNAME')
 password = os.environ.get('SARUFI_PASSWORD')
 account_auth_token = os.environ.get('TWILIO_AUTH_TOKEN')
 account_sid = os.environ.get('TWILIO_SID')
 
 logging.basicConfig(level=logging.DEBUG)
-# using helper libraries, authenticate
 client=Client(account_sid, account_auth_token)
 sarufi = Sarufi(username, password)
 
 app = FastAPI()
 
-# log message flow to messageResponse.log
 def log_message(message, response):
     f = open("messageResponse.log", "a")
     f.write(f"\nMessage: {message} \n {response}")
     f.flush()
 
-# webhook api endpoint
+class Message(BaseModel):
+    MessagingResponse: dict
+    class Config():
+        orm_mode = True
+
+#websocket endpoint
+@app.websocket("/ws/websocket_endpoint")
+async def websocket_endpoint(websocket: WebSocket):
+    await websocket.accept()
+    while True:
+        message = await websocket.receive_text()
+        print(message)
+        bots = sarufi.bots()
+        Nalah=bots[0]
+        response = Nalah.respond(message, chat_id="QWERTY")
+        # log_message(message, response)
+        for content in response["message"]:
+            await websocket.send_text(content)
+
+# webhook endpoint
 @app.post("/webhook_endpoint")
 async def message_endpoint(request: Request):
     data = await request.body()
@@ -57,3 +74,9 @@ async def message_endpoint(request: Request):
 
 if __name__ == '__main__':
     uvicorn.run(app, debug=True)
+
+
+
+
+
+
