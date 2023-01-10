@@ -1,2 +1,7 @@
-.env
+.deta/
 __pycache__/
+venv/
+.env
+messageResponse.log
+micros.yaml
+sarufi-educational-chatbot/
